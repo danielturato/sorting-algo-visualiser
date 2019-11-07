@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 
 import './App.css';
-import List from './components/List.js';
 import Menu from './components/Menu.js';
+import BubbleSort from './algorithms/BubbleSort.js';
 
 class App extends Component {
 
@@ -14,12 +14,6 @@ class App extends Component {
     this.createArray();
   }
 
-  test() {
-    const arr = this.state.array;
-    arr[0] = 600;
-    this.setState({array: arr});
-  }
-
   createArray() {
     const array = [];
     for (let i =0; i<300; i++) {
@@ -29,11 +23,27 @@ class App extends Component {
     this.setState({array: array});
   }
 
+  bubbleSort() {
+    console.log(BubbleSort(this.state.array));
+  }
+
   render() {
     return (
       <>
-        <List list={this.state.array}/>
-        <Menu test={this.test}/>
+        <div className="list-container">
+          {this.state.array.map((value, idx) => (
+          <div 
+            className = "list-bar"
+            key={idx}
+            style={{
+              backgroundColor: 'turquoise',
+              height: `${value}px`
+            }}>
+          </div>
+          ))}
+        </div>
+        <button onClick={() => this.createArray()}>Reset Array</button>
+        <button onClick={() => this.bubbleSort()}>Bubble Sort</button>
       </>
     );
   }

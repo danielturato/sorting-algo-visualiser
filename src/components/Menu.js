@@ -1,9 +1,11 @@
-import React from 'react';
+// import React from 'react';
 
-const Menu = ({test}) => {
-    return (
-        <button onClick={test}></button>
-    );
-}
+// const Menu = ({generateNewArray}) => {
+//     return (
+//         <>
+//             <button onClick={generateNewArray()}>Reset Array</button>
+//         </>
+//     );
+// }
 
-export default Menu;
+// export default Menu;
