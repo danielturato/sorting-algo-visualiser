@@ -3,10 +3,12 @@ import React, {Component} from 'react';
 import './App.css';
 import Menu from './components/Menu.js';
 import BubbleSortAnimations from './algorithms/BubbleSort.js';
+import InsertionSortAnimations from './algorithms/InsertionSort.js';
 
+const ANIMATION_SPEED = 1;
 const SWAPPED_COLOUR = 'red';
-const COMPLETED_COLOUR = 'green';
-const DEFAULT_COLOUR = 'black';
+const COMPARISON_COLOUR = 'green';
+const DEFAULT_COLOUR = 'lightblue';
 
 class App extends Component {
 
@@ -32,11 +34,22 @@ class App extends Component {
     secondElement.style.backgroundColor = colour;
   }
 
+  swapHeights(firstElement, secondElement) {
+    const firstHeight = firstElement.style.height;
+    firstElement.style.height = secondElement.style.height;
+    secondElement.style.height = firstHeight;
+  }
+
+  getVisualizerArrayBars() {
+    return document.querySelectorAll('.list-bar');
+  }
+
   bubbleSort() {
     const animations = BubbleSortAnimations(this.state.array);
-    const visualizerArray = document.querySelectorAll('.list-bar'); 
+    const visualizerArray = this.getVisualizerArrayBars();
 
     for (let i=0; i < animations.length; i++) {
+
       const comparisons = animations[i][0];
       const swapped = animations[i][1];
       const firstValue = visualizerArray[comparisons[0]];
@@ -44,26 +57,50 @@ class App extends Component {
 
       if (swapped) {
         setTimeout(() => {
-          this.changeColour(firstValue, secondValue, COMPLETED_COLOUR);
+          this.changeColour(firstValue, secondValue, COMPARISON_COLOUR);
 
           this.changeColour(firstValue, secondValue, SWAPPED_COLOUR);
 
           setTimeout(() => {
-            this.changeColour(firstValue, secondValue, COMPLETED_COLOUR);
-          }, i * 1);
+            this.changeColour(firstValue, secondValue, DEFAULT_COLOUR);
+          }, i * ANIMATION_SPEED);
 
-          const firstHeight = firstValue.style.height;
-          firstValue.style.height = secondValue.style.height;
-          secondValue.style.height = firstHeight;
-        }, i * 1);
+          this.swapHeights(firstValue, secondValue);
+        }, i * ANIMATION_SPEED);
       } else {
         setTimeout(() => {
-          this.changeColour(firstValue, secondValue, COMPLETED_COLOUR);
-        }, i * 1);
+          this.changeColour(firstValue, secondValue, COMPARISON_COLOUR);
+
+          setTimeout(() => {
+            this.changeColour(firstValue, secondValue, DEFAULT_COLOUR);
+          }, i * ANIMATION_SPEED);
+
+        }, i * ANIMATION_SPEED);
       }
 
-
     }
+  }
+
+  insertionSort() {
+    const animations = InsertionSortAnimations(this.state.array);
+    const visualizerArray = this.getVisualizerArrayBars(); 
+
+    for (let i=0; i < animations.length; i++) {
+      const comparisons = animations[i];
+      const firstValue = visualizerArray[comparisons[0]];
+      const secondValue = visualizerArray[comparisons[1]];
+
+      setTimeout(() => {
+
+        this.changeColour(firstValue, secondValue, COMPARISON_COLOUR);
+
+        setTimeout(() => {
+          this.changeColour(firstValue, secondValue, DEFAULT_COLOUR);
+        }, i * ANIMATION_SPEED);
+
+        this.swapHeights(firstValue, secondValue);
+      }, i * ANIMATION_SPEED);
+     }
   }
 
   render() {
@@ -83,6 +120,7 @@ class App extends Component {
         </div>
         <button onClick={() => this.generateArray()}>Reset Array</button>
         <button onClick={() => this.bubbleSort()}>Bubble Sort</button>
+        <button onClick={() => this.insertionSort()}>Insertion Sort</button>
       </>
     );
   }
