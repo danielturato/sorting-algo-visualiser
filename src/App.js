@@ -8,6 +8,7 @@ import InsertionSortAnimations from './algorithms/InsertionSort.js';
 const ANIMATION_SPEED = 1;
 const SWAPPED_COLOUR = 'red';
 const COMPARISON_COLOUR = 'green';
+const FINISHED_COLOUR = 'purple';
 const DEFAULT_COLOUR = 'lightblue';
 
 class App extends Component {
@@ -27,6 +28,7 @@ class App extends Component {
     }
 
     this.setState({array: array});
+    this.resetArrayBars();
   }
 
   changeColour(firstElement, secondElement, colour) {
@@ -44,6 +46,13 @@ class App extends Component {
     return document.querySelectorAll('.list-bar');
   }
 
+  resetArrayBars() {
+    const visualizerArray = this.getVisualizerArrayBars();
+    for (let i = 0; i < visualizerArray.length; i++) {
+      visualizerArray[i].style.backgroundColor = DEFAULT_COLOUR;
+    }
+  }
+
   bubbleSort() {
     const animations = BubbleSortAnimations(this.state.array);
     const visualizerArray = this.getVisualizerArrayBars();
@@ -52,29 +61,19 @@ class App extends Component {
 
       const comparisons = animations[i][0];
       const swapped = animations[i][1];
+      const finished = animations[i][2];
       const firstValue = visualizerArray[comparisons[0]];
       const secondValue = visualizerArray[comparisons[1]];
 
+      if (finished) {
+        setTimeout(() => {
+          secondValue.style.backgroundColor = 'purple';
+        }, i * ANIMATION_SPEED);
+      }
+
       if (swapped) {
         setTimeout(() => {
-          this.changeColour(firstValue, secondValue, COMPARISON_COLOUR);
-
-          this.changeColour(firstValue, secondValue, SWAPPED_COLOUR);
-
-          setTimeout(() => {
-            this.changeColour(firstValue, secondValue, DEFAULT_COLOUR);
-          }, i * ANIMATION_SPEED);
-
           this.swapHeights(firstValue, secondValue);
-        }, i * ANIMATION_SPEED);
-      } else {
-        setTimeout(() => {
-          this.changeColour(firstValue, secondValue, COMPARISON_COLOUR);
-
-          setTimeout(() => {
-            this.changeColour(firstValue, secondValue, DEFAULT_COLOUR);
-          }, i * ANIMATION_SPEED);
-
         }, i * ANIMATION_SPEED);
       }
 
@@ -91,13 +90,6 @@ class App extends Component {
       const secondValue = visualizerArray[comparisons[1]];
 
       setTimeout(() => {
-
-        this.changeColour(firstValue, secondValue, COMPARISON_COLOUR);
-
-        setTimeout(() => {
-          this.changeColour(firstValue, secondValue, DEFAULT_COLOUR);
-        }, i * ANIMATION_SPEED);
-
         this.swapHeights(firstValue, secondValue);
       }, i * ANIMATION_SPEED);
      }

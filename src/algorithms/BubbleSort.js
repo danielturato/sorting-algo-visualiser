@@ -11,14 +11,25 @@ const BubbleSort = (array) => {
         isSorted = true;
         
         for (let i=0; i<array.length - 1 - counter; i++) {
+            var animation = [];
             if (array[i] > array[i+1]) {
-                animations.push([[i, i+1], true]);
+                animation.push([i, i+1], true);
                 swap(i, i+1, array);
                 isSorted = false;
             } else {
-                animations.push([[i, i+1], false]);
+                animation.push([i, i+1], false);
+            }
+
+            animation.push((i+1) >= (array.length-1-counter) ? true : false);
+            animations.push(animation);
+        }
+
+        if (isSorted) {
+            for (let i=0; i<array.length - 1 - counter; i++) {
+                animations.push([[null, i], false, true]);
             }
         }
+
         counter++;
     }
 
