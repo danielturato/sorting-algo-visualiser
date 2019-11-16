@@ -8,7 +8,7 @@ import InsertionSortAnimations from './algorithms/InsertionSort.js';
 const ANIMATION_SPEED = 1;
 const SWAPPED_COLOUR = 'red';
 const COMPARISON_COLOUR = 'green';
-const FINISHED_COLOUR = 'purple';
+const FINISHED_COLOUR = 'orange';
 const DEFAULT_COLOUR = 'lightblue';
 
 class App extends Component {
@@ -67,7 +67,7 @@ class App extends Component {
 
       if (finished) {
         setTimeout(() => {
-          secondValue.style.backgroundColor = 'purple';
+          secondValue.style.backgroundColor = FINISHED_COLOUR;
         }, i * ANIMATION_SPEED);
       }
 
@@ -83,11 +83,16 @@ class App extends Component {
   insertionSort() {
     const animations = InsertionSortAnimations(this.state.array);
     const visualizerArray = this.getVisualizerArrayBars(); 
+    visualizerArray[0].style.backgroundColor = FINISHED_COLOUR;
 
     for (let i=0; i < animations.length; i++) {
       const comparisons = animations[i];
       const firstValue = visualizerArray[comparisons[0]];
       const secondValue = visualizerArray[comparisons[1]];
+
+      setTimeout(() => {
+        firstValue.style.backgroundColor = FINISHED_COLOUR;
+      }, i * ANIMATION_SPEED)
 
       setTimeout(() => {
         this.swapHeights(firstValue, secondValue);
