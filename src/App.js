@@ -4,10 +4,9 @@ import './App.css';
 import Menu from './components/Menu.js';
 import BubbleSortAnimations from './algorithms/BubbleSort.js';
 import InsertionSortAnimations from './algorithms/InsertionSort.js';
+import SelectionSortAnimations from './algorithms/SelectionSort.js';
 
 const ANIMATION_SPEED = 1;
-const SWAPPED_COLOUR = 'red';
-const COMPARISON_COLOUR = 'green';
 const FINISHED_COLOUR = 'orange';
 const DEFAULT_COLOUR = 'lightblue';
 
@@ -100,6 +99,31 @@ class App extends Component {
      }
   }
 
+  selectionSort() {
+    const animations = SelectionSortAnimations(this.state.array);
+    const visualizerArray = this.getVisualizerArrayBars();
+
+    for (let i = 0; i < animations.length; i++) {
+      const comparisons = animations[i];
+      const firstValue = visualizerArray[comparisons[0]];
+      const secondValue = visualizerArray[comparisons[1]];
+
+      if (secondValue == null) {
+        setTimeout(() => {
+          firstValue.style.backgroundColor = FINISHED_COLOUR;
+        }, i * ANIMATION_SPEED)
+      } else {
+        setTimeout(() => {
+          firstValue.style.backgroundColor = FINISHED_COLOUR;
+        }, i * ANIMATION_SPEED)
+  
+        setTimeout(() => {
+          this.swapHeights(firstValue, secondValue);
+        }, i * ANIMATION_SPEED);
+      }
+    }
+  }
+
   render() {
     return (
       <>
@@ -118,6 +142,7 @@ class App extends Component {
         <button onClick={() => this.generateArray()}>Reset Array</button>
         <button onClick={() => this.bubbleSort()}>Bubble Sort</button>
         <button onClick={() => this.insertionSort()}>Insertion Sort</button>
+        <button onClick={() => this.selectionSort()}>Selection Sort</button>
       </>
     );
   }
