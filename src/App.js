@@ -123,6 +123,12 @@ class App extends Component {
     }
   }
 
+  mergeSort() {}
+
+  quickSort() {}
+
+  heapSort() {}
+
   render() {
     return (
       <>
@@ -139,6 +145,15 @@ class App extends Component {
             </li>
             <li onClick={() => this.selectionSort()}>
             Selection Sort
+            </li>
+            <li onClick={() => this.mergeSort()}>
+            Merge Sort
+            </li>
+            <li onClick={() => this.quickSort()}>
+            Quick Sort
+            </li>
+            <li onClick={() => this.heapSort()}>
+            Heap Sort
             </li>
           </ul>
         </nav>
