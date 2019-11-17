@@ -8,6 +8,8 @@ import SelectionSortAnimations from './algorithms/SelectionSort.js';
 const ANIMATION_SPEED = 1;
 const FINISHED_COLOUR = '#EC9B3B';
 const DEFAULT_COLOUR = '#00818A';
+const NAV_OPTION_COLOR = 'white';
+const NAV_OPTION_COLOR_HOVER = '#ECECEB';
 
 class App extends Component {
 
@@ -27,6 +29,44 @@ class App extends Component {
 
     this.setState({array: array});
     this.resetArrayBars();
+  }
+
+  arrayIsSorted() {
+    const arrCopy = this.state.array.slice();
+    arrCopy.sort();
+    const arrState = this.state.array;
+
+    for (let i = 0; i < arrState.length; i++) {
+      if(arrCopy[i] !== arrState[i]) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  toggleResetArray(style, buttonPressed) {
+    const buttons = document.querySelector('.main-nav-items').children;
+    for (let i = 0; i < buttons.length; i++) {
+      var currentButton = buttons[i];
+      currentButton.style.pointerEvents = style;
+
+      if (style === 'none') {
+        if (currentButton.id !== buttonPressed) {
+          currentButton.style.color = FINISHED_COLOUR;
+        } 
+      } else {
+        currentButton.style.color = NAV_OPTION_COLOR;
+        
+        currentButton.onmouseover = function() {
+           this.style.color = NAV_OPTION_COLOR_HOVER;
+         }
+  
+         currentButton.onmouseleave = function() {
+          this.style.color = NAV_OPTION_COLOR;
+         }
+      } 
+    }
   }
 
   changeColour(firstElement, secondElement, colour) {
@@ -54,6 +94,7 @@ class App extends Component {
   bubbleSort() {
     const animations = BubbleSortAnimations(this.state.array);
     const visualizerArray = this.getVisualizerArrayBars();
+    this.toggleResetArray('none', 'bubbleSort');
 
     for (let i=0; i < animations.length; i++) {
 
@@ -66,6 +107,7 @@ class App extends Component {
       if (finished) {
         setTimeout(() => {
           secondValue.style.backgroundColor = FINISHED_COLOUR;
+          this.toggleResetArray('none', 'bubbleSort');
         }, i * ANIMATION_SPEED);
       }
 
@@ -75,6 +117,12 @@ class App extends Component {
         }, i * ANIMATION_SPEED);
       }
 
+      if ((i+1) === animations.length) {
+        setTimeout(() => {
+          this.toggleResetArray('auto', 'bubbleSort');
+        }, i * ANIMATION_SPEED)
+      }
+    
     }
   }
 
@@ -82,6 +130,10 @@ class App extends Component {
     const animations = InsertionSortAnimations(this.state.array);
     const visualizerArray = this.getVisualizerArrayBars(); 
     visualizerArray[0].style.backgroundColor = FINISHED_COLOUR;
+    
+    if (animations.length > 0) {
+      this.toggleResetArray('none', 'insertionSort');
+    }
 
     for (let i=0; i < animations.length; i++) {
       const comparisons = animations[i];
@@ -95,12 +147,20 @@ class App extends Component {
       setTimeout(() => {
         this.swapHeights(firstValue, secondValue);
       }, i * ANIMATION_SPEED);
+
+      if ((i+1) === animations.length) {
+        setTimeout(() => {
+          this.toggleResetArray('auto', 'insertionSort');
+        }, i * ANIMATION_SPEED)
+      }
+
      }
   }
 
   selectionSort() {
     const animations = SelectionSortAnimations(this.state.array);
     const visualizerArray = this.getVisualizerArrayBars();
+    this.toggleResetArray('none', 'selectionSort');
 
     for (let i = 0; i < animations.length; i++) {
       const comparisons = animations[i];
@@ -120,6 +180,12 @@ class App extends Component {
           this.swapHeights(firstValue, secondValue);
         }, i * ANIMATION_SPEED);
       }
+
+      if ((i+1) === animations.length) {
+        setTimeout(() => {
+          this.toggleResetArray('auto', 'selectionSort');
+        }, i * ANIMATION_SPEED)
+      }
     }
   }
 
@@ -137,22 +203,22 @@ class App extends Component {
             <li id="resetArray" onClick={() => this.generateArray()}>
             Reset Array
             </li>
-            <li onClick={() => this.bubbleSort()}>
+            <li id="bubbleSort" onClick={() => this.bubbleSort()}>
             Bubble Sort
             </li>
-            <li onClick={() => this.insertionSort()}>
+            <li id="insertionSort" onClick={() => this.insertionSort()}>
             Insertion Sort
             </li>
-            <li onClick={() => this.selectionSort()}>
+            <li id="selectionSort" onClick={() => this.selectionSort()}>
             Selection Sort
             </li>
-            <li onClick={() => this.mergeSort()}>
+            <li id="mergeSort" onClick={() => this.mergeSort()}>
             Merge Sort
             </li>
-            <li onClick={() => this.quickSort()}>
+            <li id="quickSort" onClick={() => this.quickSort()}>
             Quick Sort
             </li>
-            <li onClick={() => this.heapSort()}>
+            <li id="heapSort" onClick={() => this.heapSort()}>
             Heap Sort
             </li>
           </ul>

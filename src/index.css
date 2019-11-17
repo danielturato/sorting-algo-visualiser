@@ -46,9 +46,15 @@ body {
 }
 
 .main-nav-items li {
+  padding-left: 20px;
   display: inline-block;
   padding-right: 20px;
   color: white;
+  border-right: 1px solid #fff;
+}
+
+.main-nav-items li:last-child {
+  border: none;
 }
 
 .main-nav-items li:hover {
