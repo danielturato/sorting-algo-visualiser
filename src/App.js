@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
 
 import './App.css';
-import Menu from './components/Menu.js';
 import BubbleSortAnimations from './algorithms/BubbleSort.js';
 import InsertionSortAnimations from './algorithms/InsertionSort.js';
 import SelectionSortAnimations from './algorithms/SelectionSort.js';
 
 const ANIMATION_SPEED = 1;
-const FINISHED_COLOUR = 'orange';
-const DEFAULT_COLOUR = 'lightblue';
+const FINISHED_COLOUR = '#EC9B3B';
+const DEFAULT_COLOUR = '#00818A';
 
 class App extends Component {
 
@@ -127,6 +126,23 @@ class App extends Component {
   render() {
     return (
       <>
+        <nav className="main-nav">
+          <ul className="main-nav-items">
+            <li id="resetArray" onClick={() => this.generateArray()}>
+            Reset Array
+            </li>
+            <li onClick={() => this.bubbleSort()}>
+            Bubble Sort
+            </li>
+            <li onClick={() => this.insertionSort()}>
+            Insertion Sort
+            </li>
+            <li onClick={() => this.selectionSort()}>
+            Selection Sort
+            </li>
+          </ul>
+        </nav>
+        
         <div className="list-container">
           {this.state.array.map((value, idx) => (
           <div 
@@ -139,10 +155,6 @@ class App extends Component {
           </div>
           ))}
         </div>
-        <button onClick={() => this.generateArray()}>Reset Array</button>
-        <button onClick={() => this.bubbleSort()}>Bubble Sort</button>
-        <button onClick={() => this.insertionSort()}>Insertion Sort</button>
-        <button onClick={() => this.selectionSort()}>Selection Sort</button>
       </>
     );
   }
