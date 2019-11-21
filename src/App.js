@@ -4,6 +4,7 @@ import './App.css';
 import BubbleSortAnimations from './algorithms/BubbleSort.js';
 import InsertionSortAnimations from './algorithms/InsertionSort.js';
 import SelectionSortAnimations from './algorithms/SelectionSort.js';
+import MergeSortAnimations from './algorithms/MergeSort.js';
 
 const ANIMATION_SPEED = 1;
 const FINISHED_COLOUR = '#EC9B3B';
@@ -37,7 +38,7 @@ class App extends Component {
     const arrState = this.state.array;
 
     for (let i = 0; i < arrState.length; i++) {
-      if(arrCopy[i] !== arrState[i]) {
+      if (arrCopy[i] !== arrState[i]) {
         return false;
       }
     }
@@ -189,7 +190,31 @@ class App extends Component {
     }
   }
 
-  mergeSort() {}
+  mergeSort() {
+    const animations = MergeSortAnimations(this.state.array);
+    const visualizerArray = this.getVisualizerArrayBars();
+    this.toggleResetArray('none', 'mergeSort');
+
+    for (let i = 0; i < animations.length; i++) {
+      const comparison = animations[i][0];
+      const swapped = animations[i][1];
+
+      if (swapped) {
+        setTimeout(() => {
+          visualizerArray[comparison[0]].style.height = `${comparison[1]}px`;
+          visualizerArray[comparison[0]].style.backgroundColor = FINISHED_COLOUR;
+        }, i * ANIMATION_SPEED);
+      }
+
+      if ((i+1) === animations.length) {
+        setTimeout(() => {
+          this.toggleResetArray('auto', 'mergeSort');
+        }, i * ANIMATION_SPEED)
+      }
+
+    }
+
+  }
 
   quickSort() {}
 
