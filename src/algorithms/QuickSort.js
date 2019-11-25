@@ -1,57 +1,47 @@
 const QuickSortAnimations = (array) => {
     const animations = []
-    QuickSort(array, 0, array.length -1);
-    return array;
+    QuickSort(array, 0, array.length -1, false, animations);
+    
+    return animations;
 }
 
-const QuickSort = (array, left, right) => {
-    const stack = Array(((right - left) + 1)).fill(0);
-    var top = -1;
+ const QuickSort = (originalArray, leftIdx, rightIdx, recursiveCall, animations) => {
+    const array = recursiveCall ? originalArray : originalArray.slice();
 
-    stack[++top] = left;
-    stack[++top] = right;
-
-    while (top >= 0) {
-        right = stack[top--];
-        left = stack[top--];
-
-        var partitionPoint = partition(array, left, right);
-
-        if (partitionPoint - 1 > 1) {
-            stack[++top] = left;
-            stack[++top] = partitionPoint - 1;
-        }
-
-        if (partitionPoint + 1 < right) {
-            stack[++top] = partitionPoint + 1;
-            stack[++top] = right;
-        }
+    if (leftIdx < rightIdx) {
+      const partitionIdx = partition(array, leftIdx, rightIdx, animations);
+      const RECURSIVE_CALL = true;
+      QuickSort(array, leftIdx, partitionIdx - 1, RECURSIVE_CALL, animations);
+      QuickSort(array, partitionIdx + 1, rightIdx, RECURSIVE_CALL, animations);
     }
+
 }
 
-const partition = (array, left, right) => {
-    const pivot = array[right];
-    var i = left - 1;
+const partition = (array, leftIdx, rightIdx, animations) => {
+  const pivot = array[rightIdx];
+  let partitionIdx = leftIdx;
 
-    for (let j = left; j <= right - 1; j++) {
-        if (array[j] <= pivot) {
-            i++;
-            //animations.push([[i, j], true])
-            swap(i, j, array);
-        }
+  for (let currentIdx = leftIdx; currentIdx < rightIdx; currentIdx++) {  
+    if (array[currentIdx] < pivot) {
+      animations.push([[partitionIdx, currentIdx], true]);
+      swap(partitionIdx, currentIdx, array);
+
+      partitionIdx += 1;
+    } else {
+      animations.push([[currentIdx, rightIdx], false]);
     }
+  }
 
-    //animations.push([[i+1, right], true]);
-    swap(i+1, right, array);
-    return i + 1;
+  animations.push([[partitionIdx, rightIdx], true]);
+  swap(partitionIdx, rightIdx, array);
 
+  return partitionIdx;
 }
 
 const swap = (i, j, array) => {
-    const temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
+  const temp = array[i];
+  array[i] = array[j];
+  array[j] = temp;
 }
-
 
 export default QuickSortAnimations;

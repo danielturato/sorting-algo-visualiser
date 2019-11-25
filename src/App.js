@@ -218,26 +218,27 @@ class App extends Component {
   }
 
   quickSort() {
-    //const animations = QuickSortAnimations(this.state.array);
-    //const visualizerArray = this.getVisualizerArrayBars();
-    //this.toggleResetArray('none', 'quickSort');
-    //console.log(animations);
-    // for (let i = 0; i < animations.length; i++) {
-    //   const comparison = animations[i][0];
-    //   const swapped = animations[i][1];
+    const animations = QuickSortAnimations(this.state.array);
+    const visualizerArray = this.getVisualizerArrayBars();
+    this.toggleResetArray('none', 'quickSort');
+    for (let i = 0; i < animations.length; i++) {
+      const comparison = animations[i][0];
+      const swapped = animations[i][1];
 
-    //   if (swapped) {
-    //     setTimeout(() => {
-    //       this.swapHeights(visualizerArray[comparison[0]], visualizerArray[comparison[1]]);
-    //     }, i * ANIMATION_SPEED);
-    //   }
+      if (swapped) {
+        setTimeout(() => {
+          this.swapHeights(visualizerArray[comparison[0]], visualizerArray[comparison[1]]);
+          visualizerArray[comparison[0]].style.backgroundColor = FINISHED_COLOUR;
+        }, i * ANIMATION_SPEED);
+      }
 
-    //   if ((i+1) === animations.length) {
-    //     setTimeout(() => {
-    //       this.toggleResetArray('auto', 'quickSort');
-    //     }, i * ANIMATION_SPEED)
-    //   }
-    // }
+      if ((i+1) === animations.length) {
+        setTimeout(() => {
+          this.toggleResetArray('auto', 'quickSort');
+          visualizerArray[visualizerArray.length-1].style.backgroundColor = FINISHED_COLOUR;
+        }, i * ANIMATION_SPEED)
+      }
+    }
   }
 
   heapSort() {}
