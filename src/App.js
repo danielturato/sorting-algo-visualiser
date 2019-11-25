@@ -25,7 +25,7 @@ class App extends Component {
 
   generateArray() {
     const array = [];
-    for (let i =0; i<50; i++) {
+    for (let i =0; i<300; i++) {
       array.push(Math.floor(Math.random() * (700 - 5 + 1) + 5));
     }
 
