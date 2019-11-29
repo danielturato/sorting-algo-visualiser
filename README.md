@@ -8,7 +8,7 @@ A sorting algorithm visualiser built with React. Here you can view visualisation
 - QuickSort
 - HeapSort
 
-You can view the website here - 
+You can view the website here - https://danielturato.github.io/sorting-algo-visualiser/
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
