@@ -9,12 +9,18 @@ import MergeSortAnimations from './algorithms/MergeSort.js';
 import QuickSortAnimations from './algorithms/QuickSort.js';
 import HeapSortAnimations from './algorithms/HeapSort.js';
 
+const ARRAY_SIZE = 250;
+const ARRAY_MAX_VALUE = 700;
+const ARRAY_MIN_VALUE = 5;
 const ANIMATION_SPEED = 1;
 const FINISHED_COLOUR = '#EC9B3B';
 const DEFAULT_COLOUR = '#00818A';
 const NAV_OPTION_COLOR = 'white';
 const NAV_OPTION_COLOR_HOVER = '#ECECEB';
 
+/** 
+ * The App component models & handles the display of all algorithm animations
+*/
 class App extends Component {
 
   constructor(props) {
@@ -32,20 +38,30 @@ class App extends Component {
     array: []
   };
 
+  /** 
+   * When this component mounts, generate a new unsorted array
+  */
   componentDidMount() {
     this.generateArray();
   }
 
+  /** 
+   * Generate a new random unsorted array of values
+  */
   generateArray() {
     const array = [];
-    for (let i =0; i<200; i++) {
-      array.push(Math.floor(Math.random() * (700 - 5 + 1) + 5));
+    
+    for (let i = 0; i < ARRAY_SIZE; i++) {
+      array.push(Math.floor(Math.random() * (ARRAY_MAX_VALUE - ARRAY_MIN_VALUE + 1) + ARRAY_MIN_VALUE));
     }
 
     this.setState({array: array});
     this.resetArrayBars();
   }
 
+  /** 
+   * Tests to see if the array is sorted. Returns a boolean value suggesting this.
+  */
   arrayIsSorted() {
     const arrCopy = this.state.array.slice();
     arrCopy.sort();
@@ -60,6 +76,11 @@ class App extends Component {
     return true;
   }
 
+  /**
+   * Used to reset the array to default colours
+   * @param {string} style - The style the array should change too
+   * @param {Object} buttonPressed - The button that was pressed
+   */
   toggleResetArray(style, buttonPressed) {
     const buttons = document.querySelector('.main-nav-items').children;
     for (let i = 0; i < buttons.length; i++) {
@@ -84,21 +105,38 @@ class App extends Component {
     }
   }
 
+  /**
+   * Change the colour of the first & second dom element into a particular colour
+   * @param {*} firstElement - The first element to be changed
+   * @param {*} secondElement - The second element to be changed
+   * @param {*} colour - The colour they are changed too
+   */
   changeColour(firstElement, secondElement, colour) {
     firstElement.style.backgroundColor = colour;
     secondElement.style.backgroundColor = colour;
   }
 
+  /**
+   * Swap the heights of two dom elements
+   * @param {*} firstElement - The first dom element
+   * @param {*} secondElement - The second dom element
+   */
   swapHeights(firstElement, secondElement) {
     const firstHeight = firstElement.style.height;
     firstElement.style.height = secondElement.style.height;
     secondElement.style.height = firstHeight;
   }
 
+  /** 
+   * Get the visual dom elements representing the array
+  */
   getVisualizerArrayBars() {
     return document.querySelectorAll('.list-bar');
   }
 
+  /** 
+   * Reset the visual dom elements representing the array
+  */
   resetArrayBars() {
     const visualizerArray = this.getVisualizerArrayBars();
     for (let i = 0; i < visualizerArray.length; i++) {
@@ -106,6 +144,9 @@ class App extends Component {
     }
   }
 
+  /** 
+   * Perform the bubble sort algorithm and display the visual animations
+  */
   bubbleSort() {
     const animations = BubbleSortAnimations(this.state.array);
     const visualizerArray = this.getVisualizerArrayBars();
@@ -141,6 +182,9 @@ class App extends Component {
     }
   }
 
+  /** 
+   * Perform the insertion sort algorit and display the visual animations
+  */
   insertionSort() {
     const animations = InsertionSortAnimations(this.state.array);
     const visualizerArray = this.getVisualizerArrayBars(); 
@@ -172,6 +216,9 @@ class App extends Component {
      }
   }
 
+  /** 
+   * Perform the selection sort algorithm and display the visual animations
+  */
   selectionSort() {
     const animations = SelectionSortAnimations(this.state.array);
     const visualizerArray = this.getVisualizerArrayBars();
@@ -204,6 +251,9 @@ class App extends Component {
     }
   }
 
+  /**
+   * Peform the merge sort algorithm and display the visual animations
+   */
   mergeSort() {
     const animations = MergeSortAnimations(this.state.array);
     const visualizerArray = this.getVisualizerArrayBars();
@@ -230,6 +280,9 @@ class App extends Component {
 
   }
 
+  /** 
+   * Peform the quick sort algorithm and display the visual animations
+  */
   quickSort() {
     const animations = QuickSortAnimations(this.state.array);
     const visualizerArray = this.getVisualizerArrayBars();
@@ -254,6 +307,9 @@ class App extends Component {
     }
   }
 
+  /** 
+   * Perform the heap sort algorithm and display the visual animations
+  */
   heapSort() {
     const animations = HeapSortAnimations(this.state.array);
     const visualizerArray = this.getVisualizerArrayBars();
@@ -278,6 +334,9 @@ class App extends Component {
     }
   }
 
+  /** 
+   * Render the initial menu and array to the dom
+  */
   render() {
     return (
       <>

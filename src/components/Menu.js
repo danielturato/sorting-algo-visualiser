@@ -2,8 +2,14 @@
 
  const DEFAULT_COLOUR = '#00818A';
 
+ /** 
+  * Models & Controls the Menu to be display on the website
+ */
  class Menu extends Component {
 
+    /** 
+     * Renders the menu dom elements
+    */
      render() {
         return (
             <div>
