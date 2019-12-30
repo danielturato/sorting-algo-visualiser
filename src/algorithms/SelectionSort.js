@@ -17,11 +17,12 @@ const SelectionSort = (array) => {
     while (startIdx < array.length - 1) {
         var lowestIdx = startIdx;
         for (let i= startIdx + 1; i < array.length; i++) {
+            animations.push([[i, lowestIdx], false]);
             if (array[i] < array[lowestIdx]) {
                 lowestIdx = i;
             }
         }
-        animations.push([startIdx, lowestIdx]);
+        animations.push([[startIdx, lowestIdx], true]);
         swap(startIdx, lowestIdx, array);
         startIdx++;
     }

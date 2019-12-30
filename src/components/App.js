@@ -225,29 +225,31 @@ class App extends Component {
     this.toggleResetArray('none', 'selectionSort');
 
     for (let i = 0; i < animations.length; i++) {
-      const comparisons = animations[i];
+      const comparisons = animations[i][0];
+      const swapped = animations[i][1];
       const firstValue = visualizerArray[comparisons[0]];
       const secondValue = visualizerArray[comparisons[1]];
 
-      if (secondValue == null) {
+      if (swapped) {
         setTimeout(() => {
           firstValue.style.backgroundColor = FINISHED_COLOUR;
         }, i * ANIMATION_SPEED)
-      } else {
-        setTimeout(() => {
-          firstValue.style.backgroundColor = FINISHED_COLOUR;
-        }, i * ANIMATION_SPEED)
-  
-        setTimeout(() => {
-          this.swapHeights(firstValue, secondValue);
-        }, i * ANIMATION_SPEED);
+        
+        if (secondValue !== null) {
+          setTimeout(() => {
+            this.swapHeights(firstValue, secondValue);
+          }, i * ANIMATION_SPEED);
+        
+        }
       }
 
       if ((i+1) === animations.length) {
         setTimeout(() => {
           this.toggleResetArray('auto', 'selectionSort');
+          visualizerArray[visualizerArray.length-1].style.backgroundColor = FINISHED_COLOUR;
         }, i * ANIMATION_SPEED)
       }
+
     }
   }
 
