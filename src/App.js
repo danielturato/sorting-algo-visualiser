@@ -6,6 +6,7 @@ import InsertionSortAnimations from './algorithms/InsertionSort.js';
 import SelectionSortAnimations from './algorithms/SelectionSort.js';
 import MergeSortAnimations from './algorithms/MergeSort.js';
 import QuickSortAnimations from './algorithms/QuickSort.js';
+import HeapSortAnimations from './algorithms/HeapSort.js';
 
 const ANIMATION_SPEED = 1;
 const FINISHED_COLOUR = '#EC9B3B';
@@ -25,7 +26,7 @@ class App extends Component {
 
   generateArray() {
     const array = [];
-    for (let i =0; i<300; i++) {
+    for (let i =0; i<200; i++) {
       array.push(Math.floor(Math.random() * (700 - 5 + 1) + 5));
     }
 
@@ -241,7 +242,29 @@ class App extends Component {
     }
   }
 
-  heapSort() {}
+  heapSort() {
+    const animations = HeapSortAnimations(this.state.array);
+    const visualizerArray = this.getVisualizerArrayBars();
+    this.toggleResetArray('none', 'heapSort');
+    var sorted = 0;
+    for (let i = 0; i < animations.length; i++) {
+      const swap = animations[i];
+
+      setTimeout(() => {
+        this.swapHeights(visualizerArray[swap[0]], visualizerArray[swap[1]]);
+        if (swap.length === 3) {
+          visualizerArray[visualizerArray.length - 1 - (sorted++)].style.backgroundColor = FINISHED_COLOUR;
+        }
+      }, i * ANIMATION_SPEED)
+
+      if ((i+1) === animations.length) {
+        setTimeout(() => {
+          this.toggleResetArray('auto', 'heapSort');
+          visualizerArray[0].style.backgroundColor = FINISHED_COLOUR;
+        }, i * ANIMATION_SPEED)
+      }
+    }
+  }
 
   render() {
     return (
