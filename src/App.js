@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 import './App.css';
+import Menu from './components/Menu.js';
 import BubbleSortAnimations from './algorithms/BubbleSort.js';
 import InsertionSortAnimations from './algorithms/InsertionSort.js';
 import SelectionSortAnimations from './algorithms/SelectionSort.js';
@@ -15,6 +16,17 @@ const NAV_OPTION_COLOR = 'white';
 const NAV_OPTION_COLOR_HOVER = '#ECECEB';
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.generateArray = this.generateArray.bind(this);
+    this.bubbleSort = this.bubbleSort.bind(this);
+    this.insertionSort = this.insertionSort.bind(this);
+    this.selectionSort = this.selectionSort.bind(this);
+    this.mergeSort = this.mergeSort.bind(this);
+    this.quickSort = this.quickSort.bind(this);
+    this.heapSort = this.heapSort.bind(this);
+  }
 
   state = {
     array: []
@@ -269,44 +281,16 @@ class App extends Component {
   render() {
     return (
       <>
-        <nav className="main-nav">
-          <ul className="main-nav-items">
-            <li id="resetArray" onClick={() => this.generateArray()}>
-            Reset Array
-            </li>
-            <li id="bubbleSort" onClick={() => this.bubbleSort()}>
-            Bubble Sort
-            </li>
-            <li id="insertionSort" onClick={() => this.insertionSort()}>
-            Insertion Sort
-            </li>
-            <li id="selectionSort" onClick={() => this.selectionSort()}>
-            Selection Sort
-            </li>
-            <li id="mergeSort" onClick={() => this.mergeSort()}>
-            Merge Sort
-            </li>
-            <li id="quickSort" onClick={() => this.quickSort()}>
-            Quick Sort
-            </li>
-            <li id="heapSort" onClick={() => this.heapSort()}>
-            Heap Sort
-            </li>
-          </ul>
-        </nav>
-        
-        <div className="list-container">
-          {this.state.array.map((value, idx) => (
-          <div 
-            className = "list-bar"
-            key={idx}
-            style={{
-              backgroundColor: DEFAULT_COLOUR,
-              height: `${value}px`
-            }}>
-          </div>
-          ))}
-        </div>
+        <Menu
+          array={this.state.array}
+          generateArray={this.generateArray}
+          bubbleSort={this.bubbleSort}
+          insertionSort={this.insertionSort}
+          selectionSort={this.selectionSort}
+          mergeSort={this.mergeSort}
+          quickSort={this.quickSort}
+          heapSort={this.heapSort}
+        />
       </>
     );
   }
