@@ -1,12 +1,12 @@
 ## Overview
 
 A sorting algorithm visualiser built with React. Here you can view visualisations of the following popular algorithms:
-- BubbleSort
-- InsertionSort
-- SelectionSort
-- MergeSort
-- QuickSort
-- HeapSort
+- Bubble Sort
+- Insertion Sort
+- Selection Sort
+- Merge Sort
+- Quick Sort
+- Heap Sort
 
 You can view the website here - https://danielturato.github.io/sorting-algo-visualiser/
 
