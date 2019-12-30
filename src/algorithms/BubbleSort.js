@@ -1,7 +1,16 @@
+/**
+ * Get the animations generated from the Bubble Sort Algorithms 
+ * @param {int[]} array - The array to be sorted
+ */
 const BubbleSortAnimations = (array) => {
     return BubbleSort(array);
 }
 
+/**
+ * Sort the given array in-place using the Bubble Sort Algorithm.
+ * Returns the animations generated from the algorithm. 
+ * @param {int[]} array 
+ */
 const BubbleSort = (array) => {
     const animations = [];
     var counter = 0;
@@ -36,6 +45,12 @@ const BubbleSort = (array) => {
     return animations;
 }
 
+/**
+ * Swap two values at two given indexes in an array
+ * @param {int} i - Index one
+ * @param {int} j - Index two
+ * @param {int[]} array - The array in which the values will be swapped in
+ */
 const swap = (i, j, array) => {
     const temp = array[j];
     array[j] = array[i];

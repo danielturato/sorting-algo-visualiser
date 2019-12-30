@@ -1,3 +1,7 @@
+/**
+ * Compute the Quick Sort algorithm , returning an array of generated animations
+ * @param {int[]} array - The array of unsorted values
+ */
 const QuickSortAnimations = (array) => {
     const animations = []
     QuickSort(array, 0, array.length -1, false, animations);
@@ -5,6 +9,14 @@ const QuickSortAnimations = (array) => {
     return animations;
 }
 
+/**
+ * Compute the Quick Sort Algorithm
+ * @param {int[]} originalArray - The original unsorted array of values
+ * @param {int} leftIdx - The current left index
+ * @param {int} rightIdx - The current right index
+ * @param {boolean} recursiveCall - Suggets if it is currently in a recurisve call
+ * @param {Object[]} animations - Array of animations
+ */
  const QuickSort = (originalArray, leftIdx, rightIdx, recursiveCall, animations) => {
     const array = recursiveCall ? originalArray : originalArray.slice();
 
@@ -17,6 +29,13 @@ const QuickSortAnimations = (array) => {
 
 }
 
+/**
+ * Computes a partition index based on a left & right index
+ * @param {int[]} array - The array of values
+ * @param {int} leftIdx - The left index
+ * @param {int} rightIdx - The right index
+ * @param {Object[]} animations - The array of generated animations
+ */
 const partition = (array, leftIdx, rightIdx, animations) => {
   const pivot = array[rightIdx];
   let partitionIdx = leftIdx;
@@ -38,6 +57,12 @@ const partition = (array, leftIdx, rightIdx, animations) => {
   return partitionIdx;
 }
 
+/**
+ * Swap two values in an array at two given indexes
+ * @param {int} i - The first index
+ * @param {int} j - The second index
+ * @param {int[]} array - The array the values will be swapped in
+ */
 const swap = (i, j, array) => {
   const temp = array[i];
   array[i] = array[j];

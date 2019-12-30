@@ -1,3 +1,7 @@
+/**
+ * Returns the animations generated from the Heap Sort Algorithm
+ * @param {int[]} array - The unsorted array of values
+ */
 const HeapSortAnimations = (array) => {
     const animations = [];
     HeapSort(array, animations);
@@ -5,6 +9,11 @@ const HeapSortAnimations = (array) => {
     return animations;
 }
 
+/**
+ * Compute the Heap Sort algorithm
+ * @param {int[]} array - The unsorted array of values
+ * @param {Object[]} animations - Array of generated animations from the Heap Sort
+ */
 const HeapSort = (array, animations) => {
     heapify(array, animations);
 
@@ -15,6 +24,11 @@ const HeapSort = (array, animations) => {
     }
 }
 
+/**
+ * Used to transfer an array into a Max Binary Heap
+ * @param {int[]} array - The unsorted array of values
+ * @param {Object[]} animations - Array of generated animations from the Heap Sort
+ */
 const heapify = (array, animations) => {
     var parent = Math.floor((array.length - 2) / 2);
 
@@ -23,6 +37,14 @@ const heapify = (array, animations) => {
     }
 }
 
+/**
+ * Used to sift a value from a particular starting point in the Heap, to a 
+ * particular end-point.
+ * @param {int} curIdx - The starting index
+ * @param {int} endIdx - The ending index
+ * @param {int[]} heap - The Max Binary Heap
+ * @param {Object[]} animations - Array of animations during the sift-down
+ */
 const siftDown = (curIdx, endIdx, heap, animations) => {
     var leftChild = (2 * curIdx) + 1;
 
@@ -47,6 +69,12 @@ const siftDown = (curIdx, endIdx, heap, animations) => {
     }
 }
 
+/**
+ * Swap two values in an array at two given indexes
+ * @param {int} i - The first index 
+ * @param {int} j - The second index
+ * @param {int[]} array - The array that the values will be swapped in
+ */
 const swap = (i, j, array)  => {
     const temp = array[i];
     array[i] = array[j];

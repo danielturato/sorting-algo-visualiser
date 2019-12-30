@@ -1,3 +1,7 @@
+/**
+ * Compute the Merge Sort Algorithm, returning an array of generated animations
+ * @param {int[]} array - The array of unsorted values
+ */
 const MergeSortAnimations = (array) => {
     const animations = [];
     const auxArr = array.slice();
@@ -5,6 +9,14 @@ const MergeSortAnimations = (array) => {
     return animations;
 }
 
+/**
+ * Compute the Merge Sort algorithm
+ * @param {int[]} arr - The array of unsorted values
+ * @param {int} startIdx - The start index to be sorted
+ * @param {int} endIdx - The end index to be sorted
+ * @param {int[]} auxArr - The auxillary array
+ * @param {Object[]} animations - The array of generated animations
+ */
 const MergeSort = (arr, startIdx, endIdx, auxArr, animations) => {
     if (startIdx === endIdx) {
         return;
@@ -16,6 +28,15 @@ const MergeSort = (arr, startIdx, endIdx, auxArr, animations) => {
     merge(arr, startIdx, middleIdx, endIdx, auxArr, animations);
 }
 
+/**
+ * Used to merge two sorted arrays
+ * @param {int[]} arr - The first array
+ * @param {int} startIdx - The starting index
+ * @param {int} middleIdx - The middle index
+ * @param {int} endIdx - The end index
+ * @param {int[]} auxArr - The second/auxillary array
+ * @param {Object[]} animations - The array of generated animations
+ */
 const merge = (arr, startIdx, middleIdx, endIdx, auxArr, animations) => {
    let k = startIdx;
    let i = startIdx;
