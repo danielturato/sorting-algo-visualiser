@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 
-import './App.css';
-import Menu from './components/Menu.js';
-import BubbleSortAnimations from './algorithms/BubbleSort.js';
-import InsertionSortAnimations from './algorithms/InsertionSort.js';
-import SelectionSortAnimations from './algorithms/SelectionSort.js';
-import MergeSortAnimations from './algorithms/MergeSort.js';
-import QuickSortAnimations from './algorithms/QuickSort.js';
-import HeapSortAnimations from './algorithms/HeapSort.js';
+import '../static/App.css';
+import Menu from './Menu.js';
+import BubbleSortAnimations from '../algorithms/BubbleSort.js';
+import InsertionSortAnimations from '../algorithms/InsertionSort.js';
+import SelectionSortAnimations from '../algorithms/SelectionSort.js';
+import MergeSortAnimations from '../algorithms/MergeSort.js';
+import QuickSortAnimations from '../algorithms/QuickSort.js';
+import HeapSortAnimations from '../algorithms/HeapSort.js';
 
 const ARRAY_SIZE = 250;
 const ARRAY_MAX_VALUE = 700;
